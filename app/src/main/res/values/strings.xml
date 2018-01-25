@@ -3,4 +3,7 @@
     <string name="stop">Stop</string>
     <string name="start">Start</string>
     <string name="recmsg">Press the button below to start recording</string>
+    <string name="Pause">Pause</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
 </resources>
