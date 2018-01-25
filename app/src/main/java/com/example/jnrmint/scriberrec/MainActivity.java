@@ -2,10 +2,9 @@ package com.example.jnrmint.scriberrec;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
-import android.os.Handler;
-import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -37,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
 
     private Button playButton;
     private Button stopPlaying;
+
+    private ImageButton pbtn;
+    private ImageButton sbtn;
+
+    private Drawable ic_pause_btn = getDrawable();
 
     private MediaPlayer sPlayer;
 
@@ -72,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
         startButton = findViewById(R.id.btnStart);
         stopButton = findViewById(R.id.btnStop);
 
+        sbtn = findViewById(R.id.stopic);
+        pbtn = findViewById(R.id.playic);
+
         playButton = findViewById(R.id.btnPlay);
         stopPlaying = findViewById(R.id.btnPause);
 
@@ -100,6 +108,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        pbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRecord(mstarted);
+                if(mstarted){
+                    text.setText("Recording has started");
+                    time.startTimer();
+                    pbtn.setImageDrawable(ic_pause_btn);
+                } else {
+                    text.setText("Recording has started already!");
+                }
+                mstarted = !mstarted;
+            }
+        });
+
+        sbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onRecord(mstarted);
+                if(!mstarted){
+                    text.setText("Recording has ended");
+                    time.stopTimer();
+                } else {
+                    text.setText("Recording has stopped already!");
+                }
+            }
+        });
+
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +143,6 @@ public class MainActivity extends AppCompatActivity {
                 if(!mstarted){
                     text.setText("Recording has ended");
                     time.stopTimer();
-                    mstarted = false;
                 } else {
                     text.setText("Recording has stopped already!");
                 }
