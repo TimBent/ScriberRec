@@ -10,17 +10,17 @@
     <TextView
         android:id="@+id/recmsg"
         android:layout_width="0dp"
-        android:layout_height="23dp"
-        android:layout_marginBottom="56dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="378dp"
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="132dp"
         android:text="@string/recmsg"
         android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="@+id/btnStart"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/playic" />
+        app:layout_constraintTop_toBottomOf="@+id/floatingActionButton3" />
 
     <Button
         android:id="@+id/btnStart"
@@ -63,10 +63,13 @@
         android:id="@+id/rectimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginEnd="147dp"
+        android:layout_marginTop="32dp"
         android:text="00:00"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/floatingActionButton3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,8 +81,7 @@
         android:layout_marginTop="14dp"
         android:background="@color/transparent"
         app:layout_constraintStart_toStartOf="@+id/rectimer"
-        app:layout_constraintTop_toBottomOf="@+id/rectimer"
-        app:srcCompat="@drawable/ic_play_button" />
+        app:layout_constraintTop_toBottomOf="@+id/rectimer" />
 
     <ImageButton
         android:id="@+id/stopic"
@@ -91,5 +93,15 @@
         app:layout_constraintStart_toEndOf="@+id/playic"
         app:layout_constraintTop_toBottomOf="@+id/rectimer"
         app:srcCompat="@drawable/ic_stop_btn" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        app:srcCompat="@mipmap/ic_button_rec_round"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="61dp" />
+
 
 </android.support.constraint.ConstraintLayout>

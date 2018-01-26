@@ -24,12 +24,14 @@ public class MainActivity extends AppCompatActivity {
     //To RECORD AUDIO
     private Button stopButton;
     private Button startButton;
+    private Button recordFA;
 
     private Timer time;
 
     private MediaRecorder sRecorder;
 
     private boolean mstarted = true;
+    private boolean isPaused = false;
 
     private String mFileName;
 
@@ -40,12 +42,12 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageButton pbtn;
     private ImageButton sbtn;
-
-    private Drawable ic_pause_btn = getDrawable();
+;
 
     private MediaPlayer sPlayer;
 
     private boolean sPlaying = true;
+    private boolean isPlaying;
 
     // Requesting permission to RECORD_AUDIO
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
@@ -76,9 +78,11 @@ public class MainActivity extends AppCompatActivity {
 
         startButton = findViewById(R.id.btnStart);
         stopButton = findViewById(R.id.btnStop);
+        recordFA = findViewById(R.id.fA1);
 
         sbtn = findViewById(R.id.stopic);
         pbtn = findViewById(R.id.playic);
+        pbtn.setBackgroundResource(R.drawable.ic_play_button);
 
         playButton = findViewById(R.id.btnPlay);
         stopPlaying = findViewById(R.id.btnPause);
@@ -93,6 +97,14 @@ public class MainActivity extends AppCompatActivity {
         mFileName += "audioTest.3gp";
 
         //text.setText(mFileName);
+        final boolean record = false;
+        recordFA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!record) recordFA.setBackgroundResource(R.id.fA2);
+                else recordFA.setBackgroundResource(R.id.fA1);
+            }
+        });
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,18 +120,31 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        isPlaying = false;
+
+
         pbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onRecord(mstarted);
-                if(mstarted){
-                    text.setText("Recording has started");
+                if (isPlaying) {
+                    if (isPaused) {
+                        text.setText("Playing");
+                        pbtn.setBackgroundResource(R.drawable.ic_pause_btn);
+                        time.startTimer();
+                        isPaused = false;
+                    } else {
+                        text.setText("Paused");
+                        pbtn.setBackgroundResource(R.drawable.ic_play_button);
+                        time.stopTimer();
+                        isPaused = true;
+                    }
+                } else { //is the timer counting
+                    //onPlay(mstarted);
+                    text.setText("First Play");
                     time.startTimer();
-                    pbtn.setImageDrawable(ic_pause_btn);
-                } else {
-                    text.setText("Recording has started already!");
+                    pbtn.setBackgroundResource(R.drawable.ic_pause_btn);
+                    isPlaying = true;
                 }
-                mstarted = !mstarted;
             }
         });
 

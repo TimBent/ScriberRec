@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ScriberRec</string>
+    <string name="app_name">Scriber</string>
     <string name="stop">Stop</string>
     <string name="start">Start</string>
     <string name="recmsg">Press the button below to start recording</string>
